@@ -19,19 +19,8 @@ function Onecourse(prop) {
             <td>{prop.departmentDetails.email}</td>
             <td className="text-right" >
               <div className="actions" style={{display:"flex",justifyContent:"space-betweens"}}>
-              <Link to={`/Universities/editcourse/${prop.courseid}/${prop.id}`}> <button  className='uni-edit-btn'><ModeEditIcon/> </button></Link>
-             <Link onClick={async(e) => {
-                            e.preventDefault();
-                                const yes = window.confirm("Do you want delete ?");
-                            if (yes) {
-                                try {
-                                    await axios.delete(`https://flywise-admin2.herokuapp.com/api/deleteUnivesity/${prop.id}`);
-                                    window.location.reload();
-                                } catch (err) {
-                                    console.log(err);
-                                    }
-                            }
-                          }}  ><button  className='uni-delete-btn'><DeleteIcon/> </button></Link>
+              <Link to={`/Universities/editcourse/${prop.courseid}/${prop.id}`}> <Button  size="small" variant="contained" className='uni-edit-btn'>View Course </Button></Link>
+             
               </div>
         </td>
         </tr>

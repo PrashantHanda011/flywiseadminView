@@ -45,17 +45,7 @@ console.log(courseData)
       {loading ? (
       <LoadingPage />
             ) : (<>
-              <div className='artist-firstSection'>
-                <div className='artist-addArtistDiv'>
-                  <button
-                    className='artist-addBtn'
-                    onClick={() => history.push(`/Universities/addcourse/${param.id}`)}
-                  >
-                    <img src={addIcon} alt='add' className='artist-addIcon' />
-                    <span>Add Course</span>
-                  </button>
-                </div>
-            </div>
+              
               
                     <div className='artist-tableSection'>
                     <div className='table-wrapper' id='#scrollBar'>

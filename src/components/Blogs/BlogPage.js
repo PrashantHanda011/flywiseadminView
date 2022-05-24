@@ -60,15 +60,7 @@ const BlogPage = () => {
                 onChange={(e)=>searchItems(e.target.value)}
               />
             </div>
-            <div className='employee-addEmployeeDiv'>
-              <button
-                className='employee-addBtn'
-                onClick={() => history.push('/blog/add')}
-              >
-                <img src={addIcon} alt='add' className='employee-addIcon' />
-                <span>Add Blogs</span>
-              </button>
-            </div>
+        
           </div>
           <div className='employee-tableSection'>
          { (searchInput.length > 1) ?(

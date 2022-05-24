@@ -18,8 +18,6 @@ const ArtistsTable = (props) => {
             <th>Country Code</th>
             <th>Level</th>
             <th>Courses</th>
-            <th>Add Courses</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import { Button } from '@mui/material';
 function Singleblog(prop) {
   return (
     <>
@@ -14,19 +14,8 @@ function Singleblog(prop) {
             <td>{prop.title}</td>
             <td className="text-right" >
               <div className="actions" style={{display:"flex",justifyContent:"space-betweens"}}>
-              <Link to={`/blog/edit/${prop.id}`}> <button  className='uni-edit-btn'><ModeEditIcon/> </button></Link>
-             <Link onClick={async(e) => {
-                            e.preventDefault();
-                                const yes = window.confirm("Do you want delete ?");
-                            if (yes) {
-                                try {
-                                    await axios.delete(`https://flywise-admin2.herokuapp.com/api/deleteBlog/${prop.id}`);
-                                    window.location.reload();
-                                } catch (err) {
-                                    console.log(err);
-                                    }
-                            }
-                          }} to={'#'}  ><button  className='uni-delete-btn'><DeleteIcon/> </button></Link>
+              <Link to={`/blog/edit/${prop.id}`}> <Button size="small" variant="contained"  className='uni-edit-btn'>View blog </Button></Link>
+             
               </div>
         </td>
         </tr>

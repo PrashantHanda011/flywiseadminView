@@ -53,27 +53,6 @@ function EditBlog() {
   }, []);
 
 
-  // handlechange functions
-
-  const handleChange = (e) => {
-    const { name } = e.target;
-    setblogData({ ...blogData, [name]: e.target.value });
-  };
-
-  const handleinput2 = (e)=>{        
-    setblogData({...blogData, profilePic: e.target.files[0]});
-  }
-  
-  const handleinput3 = (e)=>{        
-    setblogData({...blogData, thumbnail: e.target.files[0]});
-   }
-
-  const handlelinks = (e)=>{
-    const { name } = e.target;
-    setblogData({...blogData, links:{...blogData.links,[name]:e.target.value} });
-  }
-
-
   //Update form
 
   const handlesubmit=async(e)=>{
@@ -154,21 +133,21 @@ function EditBlog() {
                       <input
                         type='text'
                         name='writerName'
+                        disabled
                         placeholder='Full Name'
                         defaultValue={getblogData.writerName}
                         className='addEmployee-inputField'
-                        onChange={handleChange}
                       />
                     </div>
                     <div className='addEmployee-inputFieldDiv'>
                       <label className='addEmployee-inputLabel'>Writer Tagline <span style={{color:"red",fontSize:"1.2rem"}}>*</span></label>
                       <input
                         type='text'
+                        disabled
                         name='writerTagline'
                         defaultValue={getblogData.writerTagline}
                         placeholder='Writer Tagling'
                         className='addEmployee-inputField'
-                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -177,14 +156,14 @@ function EditBlog() {
 
                   <div className='addEmployee-alignRow'>
                   <div className='addEmployee-inputFieldDiv'>
-                      <label className='addEmployee-inputLabel'>Date <span style={{color:"red",fontSize:"1.2rem"}}>*</span></label>
+                      <label  className='addEmployee-inputLabel'>Date <span style={{color:"red",fontSize:"1.2rem"}}>*</span></label>
                       <input
+                      disabled
                         type='date'
                         name='date'
                         placeholder='Date'
                         defaultValue={blogdate}
                         className='addEmployee-inputField'
-                        onChange={handleChange}
                       />
                     </div>
 
@@ -192,8 +171,9 @@ function EditBlog() {
                     <div className='addEmployee-inputFieldDiv'>
                         <label className='addEmployee-inputLabel'>Time To Read (Minutes)</label>
                         <input  name="minutes" 
+                        disabled
                         defaultValue={getblogData.minutes}
-                        onChange={handleChange} className='addEmployee-inputField' type="number"  />
+                         className='addEmployee-inputField' type="number"  />
                     </div>
 
                   </div>
@@ -205,22 +185,22 @@ function EditBlog() {
                     <div className='addEmployee-inputFieldDiv'>
                       <label className='addEmployee-inputLabel'>Title <span style={{color:"red",fontSize:"1.2rem"}}>*</span></label>
                       <input
+                      disabled
                         type='text'
                         name='title'
                         defaultValue={getblogData.title}
                         placeholder='Title Tagling'
                         className='addEmployee-inputField'
-                        onChange={handleChange}
                       />
                     </div>
                     <div className='addEmployee-inputFieldDiv'>
                       <label className='addEmployee-inputLabel'>Writer Profile</label>
                       <input
+                      disabled
                         type='file'
                         name='profilePic'
                         placeholder='Writer Profile'
                         className='addEmployee-inputField'
-                        onChange={handleinput2}
                       />
                     </div>
                     
@@ -231,17 +211,17 @@ function EditBlog() {
                   <div className='addEmployee-alignRow'>
                         <div className='addEmployee-inputFieldDiv'>
                           <label className='addEmployee-inputLabel'>Hashtags</label>
-                          <input className='addEmployee-inputField' defaultValue={ getblogData.tag } onChange={handleChange} type="text" name='tag' />
+                          <input  disabled className='addEmployee-inputField' defaultValue={ getblogData.tag }  type="text" name='tag' />
                         </div>
                       
                       <div className='addEmployee-inputFieldDiv'>
                       <label className='addEmployee-inputLabel'>Thumb Nail</label>
                       <input
                         type='file'
+                        disabled
                         name='thumbnail'
                         placeholder='Thumbnail'
                         className='addEmployee-inputField'
-                        onChange={handleinput3}
                       />
                     </div>
                 </div>
@@ -253,10 +233,10 @@ function EditBlog() {
                           <div className='addEmployee-inputField'>
                       
                           <label className='addEmployee-inputLabel'>Facebook</label>
-                              <input defaultValue={getblogData?.links?.fb } className='addEmployee-inputField' type="text" onChange={handlelinks} name='fb' />
+                              <input disabled defaultValue={getblogData?.links?.fb } className='addEmployee-inputField' type="text"  name='fb' />
                       
                           <label className='addEmployee-inputLabel'>Linkedin</label>
-                              <input className='addEmployee-inputField' defaultValue={getblogData?.links?.linkedin} type="text" onChange={handlelinks} name='linkedin' />
+                              <input disabled className='addEmployee-inputField' defaultValue={getblogData?.links?.linkedin} type="text"  name='linkedin' />
                           
                           </div>
                     </div>
@@ -266,10 +246,10 @@ function EditBlog() {
                           <div className='addEmployee-inputField'>
                       
                           <label className='addEmployee-inputLabel'>Instagram</label>
-                              <input className='addEmployee-inputField' defaultValue={getblogData?.links?.insta} type="text"  onChange={handlelinks} name='insta' />
+                              <input disabled className='addEmployee-inputField' defaultValue={getblogData?.links?.insta} type="text"   name='insta' />
                       
                           <label className='addEmployee-inputLabel'>Twitter</label>
-                              <input className='addEmployee-inputField' defaultValue={getblogData?.links?.twitter} type="text" onChange={handlelinks} name='twitter' />
+                              <input disabled className='addEmployee-inputField' defaultValue={getblogData?.links?.twitter} type="text"  name='twitter' />
                           </div>
                     </div>
               </div>
@@ -278,28 +258,15 @@ function EditBlog() {
                        <div style={{marginTop:"20px",width:"100%"}}>
                         <label className='addEmployee-inputLabel'>Body <span style={{color:"red",fontSize:"1.2rem"}}>*</span></label>
                         <ReactQuill 
+                        
                         modules={EditBlog.modules}
                         formats ={EditBlog.formats}
-                        onChange={ (content, delta, source, editor)=>setblogData({...blogData,body:editor.getHTML()})}  
                         defaultValue={getblogData?.body} / >
                           </div>
                   </div>
 
 
                   <div className='addEmployee-submitDetailDiv'>
-                    <button
-                      className='addEmployee-submitDetailBtn'
-                      onClick={handlesubmit}
-                    >
-                      Update Blog
-                      {
-                        spinn ? (
-                          <div class="spinner-border spinner-border-sm text-white mx-2" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div>    
-                        ) : ("")
-                      }
-                    </button>
                   </div>
                 </div>
     )}

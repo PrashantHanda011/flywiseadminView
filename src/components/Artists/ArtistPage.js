@@ -67,15 +67,7 @@ const ArtistPage = () => {
                 onChange={(e)=>searchItems(e.target.value)}
               />
             </div>
-            <div className='artist-addArtistDiv'>
-              <button
-                className='artist-addBtn'
-                onClick={() => history.push('/universities/add')}
-              >
-                <img src={addIcon} alt='add' className='artist-addIcon' />
-                <span>Add University</span>
-              </button>
-            </div>
+       
         </div>
           <div className='artist-tableSection'>
             {

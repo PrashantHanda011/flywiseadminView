@@ -145,76 +145,6 @@ function Editcourse() {
     }
 
     
-    //for posting updated data
-
-      const handlesubmit = async()=>{
-        setspinn(true)
-        try {
-          await axios.patch(`https://flywise-admin2.herokuapp.com/api/updateCourse/${param.id2}`,courseData)
-          history.push(`/Universities/viewcourse/${param.id1}`)
-        setspinn(false)
-
-        } catch (error) {
-          console.log(error);
-        setspinn(false)
-
-        }
-      }
-
-
-
-      //handlechange
-
-    const handleChange = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, [name]: e.target.value });
-    };
-  
-    const handlegre = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, gre: { ...courseData.gre, [name]: e.target.value } })
-    }
-  
-    const handletoefl = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, toefl: { ...courseData.toefl, [name]: e.target.value } })
-    }
-  
-    const handleielts = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, ielts: { ...courseData.ielts, [name]: e.target.value } })
-    }
-  
-    const handleduolingo = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, duolingo: { ...courseData.duolingo, [name]: e.target.value } })
-    }
-  
-    const handlepte = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, pte: { ...courseData.pte, [name]: e.target.value } })
-    }
-    const handlefalldeadline = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, fallDeadline: { ...courseData.fallDeadline, [name]: e.target.value } })
-    }
-    const handlesummerdeadline = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, summerDeadline: { ...courseData.summerDeadline, [name]: e.target.value } })
-    }
-    const handlespringdeadline = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, springDeadline: { ...courseData.springDeadline, [name]: e.target.value } })
-    }
-    const handledepartment = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, departmentDetails: { ...courseData.departmentDetails, [name]: e.target.value } })
-    }
-    const handleadmissionoffice = (e) => {
-      const { name } = e.target;
-      setcourseData({ ...courseData, admissionOffice: { ...courseData.admissionOffice, [name]: e.target.value } })
-    }
-  
   
 
 
@@ -258,7 +188,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   <input
                     type='text'
                     name='name'
-                    onChange={handleChange}
+                    disabled
                     placeholder='Course Name'
                     defaultValue={getcoursedata.name}
                     className='addArtist-inputField'
@@ -270,6 +200,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     Discipline  
                   </label>
                   <select
+                  disabled
                     className='addArtist-selectField'
                     onChange={(e) => { setcourseData({ ...courseData, discipline: { name: e.target.value } }) }}>
                 
@@ -295,11 +226,11 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   <input
                     type='number'
                     min="0"
+                    disabled
                     max="200"
                     defaultValue={getcoursedata?.applicationFees}
                     maxLength="3"
                     name='applicationFees'
-                    onChange={handleChange}
                     placeholder='Between 0-200 USD'
                     className='addArtist-inputField'
                   />
@@ -311,10 +242,10 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   <input
                     type='number'
                     min="1000"
+                    disabled
                     max="100000"
                     name='programFees'
                     defaultValue={getcoursedata?.programFees}
-                    onChange={handleChange}
                     placeholder='1000-100000 USD'
                     className='addArtist-inputField'
                   />
@@ -335,8 +266,10 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
                     name="transcriptRequired"
                     row
+                    disabled
+                    aria-disabled
+                    disabled
                     defaultValue={getcoursedata?.transcriptRequired}
-                    onChange={handleChange}
                     className='addArtist-inputField'
                   >
                     <FormControlLabel value="true" control={<Radio />} label="Yes" />
@@ -352,7 +285,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
                     name="financialDocuRequired"
                     defaultValue={getcoursedata?.financialDocuRequired}
-                    onChange={handleChange}
                     className='addArtist-inputField'
                     row>
                     <FormControlLabel value="true" control={<Radio />} label="Yes" />
@@ -374,7 +306,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     name="thirdPartyRequired"
                     row
                     defaultValue={getcoursedata?.thirdPartyRequired}
-                    onChange={handleChange}
                     className='addArtist-inputField'
                   >
                     <FormControlLabel value="true" control={<Radio />} label="Yes" />
@@ -389,10 +320,10 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   <input
                     type='number'
                     min="0"
+                    disabled
                     max="4.0"
                     defaultValue={getcoursedata?.minGpaRequired}
                     name='minGpaRequired'
-                    onChange={handleChange}
                     placeholder='for ex: 2.5 , 3.0'
                     className='addArtist-inputField'
                   />
@@ -414,14 +345,13 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     name="greRequired"
                     row
                     defaultValue={getcoursedata?.gre?.greRequired}
-                    onChange={handlegre}
                     className='addArtist-inputField'
                   >
                     <FormControlLabel value="true" onClick={nobox} control={<Radio />} label="Yes" />
                     <FormControlLabel value="false" onClick={nobox} control={<Radio />} label="No" />
                     <FormControlLabel onClick={onbox} value="Special Waiver" control={<Radio />} label="Special Waiver" />
                     {showgrebox ? (<input type="text" defaultValue={getcoursedata?.gre?.greWaiver}
-                      onChange={handlegre} name="greWaiver" placeholder='Describe special waiver' className='addArtist-inputField' />
+                       name="greWaiver" placeholder='Describe special waiver' className='addArtist-inputField' />
                     ) : ("")}
                   </RadioGroup>
                 </div>
@@ -438,27 +368,27 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                         <div className='Greverbal'>
                           <h3 > Total</h3>
                           <label>Score </label>
-                          <input defaultValue={getcoursedata?.gre?.minTotal} onChange={handlegre} min="140" name="minTotal" max="170" placeholder='140 - 170' type="number" id="" />
+                          <input disabled defaultValue={getcoursedata?.gre?.minTotal}  min="140" name="minTotal" max="170" placeholder='140 - 170' type="number" id="" />
                         </div>
                         <div className='Greverbal'>
                           <h3 > Verbal</h3>
                           <label>Score </label>
-                          <input defaultValue={getcoursedata?.gre?.minVerbal} name="minVerbal" onChange={handlegre} min="140" max="170" placeholder='140 - 170' type="number" id="" />
+                          <input disabled defaultValue={getcoursedata?.gre?.minVerbal} name="minVerbal"  min="140" max="170" placeholder='140 - 170' type="number" id="" />
                         </div>
 
                         <div className='Greverbal'>
                           <h3 > Quant</h3>
                           <label>Score </label>
-                          <input defaultValue={getcoursedata?.gre?.minQuant} name="minQuant" onChange={handlegre} min="140" max="170" type="number" placeholder='140 - 170' id="" />
+                          <input disabled defaultValue={getcoursedata?.gre?.minQuant} name="minQuant"  min="140" max="170" type="number" placeholder='140 - 170' id="" />
                         </div>
 
                         <div className='Greverbal'>
                           <h3 > AWA</h3>
                           <label>Score </label>
-                          <input name="minAWA" defaultValue={getcoursedata?.gre?.minAWA} onChange={handlegre} min="0" max="6.0" placeholder=' 0 - 6' type="number" id="" />
+                          <input disabled name="minAWA" defaultValue={getcoursedata?.gre?.minAWA}  min="0" max="6.0" placeholder=' 0 - 6' type="number" id="" />
                         </div>
                       </div>) : (
-                      <input type="text" onChange={handleChange}  name="Gremindefault" value="N/A" className='addArtist-inputField' />
+                      <input type="text" disabled  name="Gremindefault" value="N/A" className='addArtist-inputField' />
                     )
                   }
                 </div>
@@ -477,7 +407,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   aria-labelledby="demo-row-controlled-radio-buttons-group"
                   row
                   defaultValue={getcoursedata?.toefl?.toeflAccepted}
-                  onChange={handletoefl}
                   name="toeflAccepted"
                   className='addArtist-inputField'
                 >
@@ -496,27 +425,27 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   <div className='toefl-category-box'>
                     <div className='toefl-category-box-single'>
                       <label >Total Score</label>
-                      <input type="number" defaultValue={getcoursedata?.toefl?.total} onChange={handletoefl} name="total" placeholder="< 120" max="120" min="0" />
+                      <input type="number" disabled defaultValue={getcoursedata?.toefl?.total} name="total" placeholder="< 120" max="120" min="0" />
                     </div>
                     <div className='toefl-category-box-single'>
                       <label >Reading</label>
-                      <input type="number" defaultValue={getcoursedata?.toefl?.minReading} onChange={handletoefl} name="minReading" placeholder='< 30' min="0" max="30" />
+                      <input type="number" disabled defaultValue={getcoursedata?.toefl?.minReading}  name="minReading" placeholder='< 30' min="0" max="30" />
                     </div>
                     <div className='toefl-category-box-single'>
                       <label >Writing</label>
-                      <input type="number" defaultValue={getcoursedata?.toefl?.minWriting} onChange={handletoefl} name="minWriting" placeholder='< 30' min="0" max="30" />
+                      <input type="number" disabled defaultValue={getcoursedata?.toefl?.minWriting}  name="minWriting" placeholder='< 30' min="0" max="30" />
                     </div>
                     <div className='toefl-category-box-single'>
                       <label >Speaking</label>
-                      <input type="number" defaultValue={getcoursedata?.toefl?.minSpeaking} onChange={handletoefl} name="minSpeaking" placeholder='< 30' min="0" max="30" />
+                      <input type="number" disabled defaultValue={getcoursedata?.toefl?.minSpeaking}  name="minSpeaking" placeholder='< 30' min="0" max="30" />
                     </div>
                     <div className='toefl-category-box-single'>
                       <label >Listening</label>
-                      <input type="number" defaultValue={getcoursedata?.toefl?.minListening} onChange={handletoefl} name="minListening" placeholder='< 30' min="0" max="30" />
+                      <input type="number" disabled defaultValue={getcoursedata?.toefl?.minListening}  name="minListening" placeholder='< 30' min="0" max="30" />
                     </div>
                   </div>
                 </div>):(
-                  <input type="text" onChange={handleChange}  name="Gremindefault" value="N/A" className='addArtist-inputField' />
+                  <input type="text" disabled  name="Gremindefault" value="N/A" className='addArtist-inputField' />
                 )}
               </div>
 
@@ -537,7 +466,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                         aria-labelledby="demo-row-controlled-radio-buttons-group"
                         row
                         defaultValue={getcoursedata?.ielts?.ieltsAccepted}
-                        onChange={handleielts}
                         name="ieltsAccepted"
                         className='addArtist-inputField'
                       >
@@ -559,27 +487,27 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                         <div className='toefl-category-box'>
                           <div className='toefl-category-box-single'>
                             <label >Total Score</label>
-                            <input type="number" defaultValue={getcoursedata?.ielts?.total} onChange={handleielts} name="total" min="0" max="9" placeholder='< 9' />
+                            <input type="number" disabled defaultValue={getcoursedata?.ielts?.total} name="total" min="0" max="9" placeholder='< 9' />
                           </div>
                           <div className='toefl-category-box-single'>
                             <label >Reading</label>
-                            <input type="number" defaultValue={getcoursedata?.ielts?.minReading} onChange={handleielts} name="minReading" placeholder='< 9' min="0" max="9.0" />
+                            <input type="number" disabled defaultValue={getcoursedata?.ielts?.minReading}  name="minReading" placeholder='< 9' min="0" max="9.0" />
                           </div>
                           <div className='toefl-category-box-single'>
                             <label >Writing</label>
-                            <input type="number" defaultValue={getcoursedata?.ielts?.minWriting} onChange={handleielts} name="minWriting" placeholder='< 9' min="0" max="9.0" />
+                            <input disabled type="number" defaultValue={getcoursedata?.ielts?.minWriting}  name="minWriting" placeholder='< 9' min="0" max="9.0" />
                           </div>
                           <div className='toefl-category-box-single'>
                             <label >Speaking</label>
-                            <input type="number" defaultValue={getcoursedata?.ielts?.minSpeaking} onChange={handleielts} placeholder='< 9' min="0" max="9.0" name='minSpeaking' />
+                            <input disabled type="number" defaultValue={getcoursedata?.ielts?.minSpeaking}  placeholder='< 9' min="0" max="9.0" name='minSpeaking' />
                           </div>
                           <div className='toefl-category-box-single'>
                             <label >Listening</label>
-                            <input type="number" defaultValue={getcoursedata?.ielts?.minListening} onChange={handleielts} placeholder='< 9' min="0" max="9.0" name='minListening' />
+                            <input disabled type="number" defaultValue={getcoursedata?.ielts?.minListening}  placeholder='< 9' min="0" max="9.0" name='minListening' />
                           </div>
                         </div>
                       </div>):(
-                          <input type="text" onChange={handleChange}  name="Gremindefault" value="N/A" className='addArtist-inputField' />
+                          <input type="text" disabled   name="Gremindefault" value="N/A" className='addArtist-inputField' />
                       )}
                   </div>
             </div>
@@ -597,7 +525,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       row
                       defaultValue={getcoursedata?.duolingo?.duoLingoAccepted}
-                      onChange={handleduolingo}
                       name="duoLingoAccepted"
                       className='addArtist-inputField'
                     >
@@ -618,27 +545,27 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                       <div className='toefl-category-box'>
                         <div className='toefl-category-box-single'>
                           <label >Total Score</label>
-                          <input type="number" defaultValue={getcoursedata?.duolingo?.total} onChange={handleduolingo} name="total" min="0" max="160" placeholder='< 160' />
+                          <input type="number" disabled defaultValue={getcoursedata?.duolingo?.total}  name="total" min="0" max="160" placeholder='< 160' />
                         </div>
                         <div className='toefl-category-box-single'>
                           <label >Literacy</label>
-                          <input type="number" defaultValue={getcoursedata?.duolingo?.minLiteracy} onChange={handleduolingo} name="minLiteracy" placeholder='< 160' min="0" max="160" />
+                          <input type="number" disabled defaultValue={getcoursedata?.duolingo?.minLiteracy}  name="minLiteracy" placeholder='< 160' min="0" max="160" />
                         </div>
                         <div className='toefl-category-box-single'>
                           <label >Comprehension</label>
-                          <input type="number" defaultValue={getcoursedata?.duolingo?.minComprehension} onChange={handleduolingo} name="minComprehension" placeholder='< 160' min="0" max="160" />
+                          <input type="number" disabled defaultValue={getcoursedata?.duolingo?.minComprehension}  name="minComprehension" placeholder='< 160' min="0" max="160" />
                         </div>
                         <div className='toefl-category-box-single'>
                           <label >Conversation</label>
-                          <input type="number" defaultValue={getcoursedata?.duolingo?.minConversation} onChange={handleduolingo} placeholder='< 160' min="0" max="160" name='minConversation' />
+                          <input type="number" disabled defaultValue={getcoursedata?.duolingo?.minConversation}  placeholder='< 160' min="0" max="160" name='minConversation' />
                         </div>
                         <div className='toefl-category-box-single'>
                           <label >Production</label>
-                          <input type="number" defaultValue={getcoursedata?.duolingo?.minProduction} onChange={handleduolingo} placeholder='< 160' min="0" max="160" name='minProduction' />
+                          <input disabled type="number"  defaultValue={getcoursedata?.duolingo?.minProduction}  placeholder='< 160' min="0" max="160" name='minProduction' />
                         </div>
                       </div>
                     </div>):(
-                      <input type="text" onChange={handleChange}  name="Gremindefault" value="N/A" className='addArtist-inputField' />
+                      <input type="text" disabled  name="Gremindefault" value="N/A" className='addArtist-inputField' />
                     )}
                    </div>
               
@@ -656,7 +583,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   <RadioGroup
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
                     row
-                    onChange={handlepte}
                     defaultValue={getcoursedata?.pte?.pteAccepted}
                     name="pteAccepted"
                     className='addArtist-inputField'
@@ -672,8 +598,8 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     type='number'
                     name='minScore'
                     defaultValue={getcoursedata?.pte?.minScore}
-                    onChange={handlepte}
                     placeholder='< 90'
+                    disabled
                     min="0"
                     max="90"
                     className='addArtist-inputField'
@@ -694,13 +620,13 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   <div className='addArtist-inputField deadline-boxes'>
                     <div className='deadline-boxes-single'>
                       <a href='#'>Priority</a>
-                      <input type="date" defaultValue={fallPrdate} onChange={handlefalldeadline}
-                        name='priority' className='addArtist-inputField'
+                      <input type="date" defaultValue={fallPrdate} 
+                      disabled  name='priority' className='addArtist-inputField'
                       />
                     </div>
                     <div className='deadline-boxes-single'>
                       <a href='#'>Final</a>
-                      <input type="date" defaultValue={fallFidate} onChange={handlefalldeadline}
+                      <input disabled type="date" defaultValue={fallFidate} 
                         name='final' className='addArtist-inputField' />
                     </div>
                   </div>
@@ -715,16 +641,16 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     <div className='deadline-boxes-single'>
                       <a href='#'>Priority</a>
                       <input type="date"
+                      disabled
                         defaultValue={springPrdate}
-                       onChange={handlespringdeadline}
                         name='priority' className='addArtist-inputField' />
 
                     </div>
                     <div className='deadline-boxes-single'>
                       <a href='#'>Final</a>
                       <input type="date" 
+                      disabled
                       defaultValue={springFidate}
-                      onChange={handlespringdeadline}
                         name='final' className='addArtist-inputField' />
                     </div>
                   </div>
@@ -744,15 +670,16 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     <div className='addArtist-inputField deadline-boxes'>
                       <div className='deadline-boxes-single'>
                         <a href='#'>Priority</a>
-                        <input type="date" 
+                        <input type="date"
+                        disabled 
                         defaultValue={summerPrdate}
-                        onChange={handlesummerdeadline}
                           name='priority' className='addArtist-inputField' />
                       </div>
                       <div className='deadline-boxes-single'>
                         <a href='#'>Final</a>
-                        <input type="date" defaultValue={summerFidate} onChange={handlesummerdeadline}
+                        <input type="date" defaultValue={summerFidate} 
                           name='final'
+                          disabled
                           className='addArtist-inputField' />
                       </div>
                     </div>
@@ -767,7 +694,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="nonITAccepted"
                       defaultValue={getcoursedata?.nonITAccepted}
-                      onChange={handleChange}
                       className='addArtist-inputField'
                       row
                     >
@@ -792,7 +718,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="preWaiverForNonIT"
                       defaultValue={getcoursedata?.preWaiverForNonIT}
-                      onChange={handleChange}
                       className='addArtist-inputField'
                       row
                     >
@@ -809,7 +734,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="last60UnitsConsidered"
                       defaultValue={getcoursedata?.last60UnitsConsidered}
-                      onChange={handleChange}
                       className='addArtist-inputField'
                       row
                     >
@@ -833,15 +757,15 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
 
                         <div className='department-details-single'>
                           <label >Email</label>
-                          <input type="email" defaultValue={getcoursedata?.departmentDetails?.email} onChange={handledepartment} name="email" id="" />
+                          <input disabled type="email" defaultValue={getcoursedata?.departmentDetails?.email}  name="email" id="" />
                         </div>
                         <div className='department-details-single'>
                           <label>Address</label>
-                          <input type="text" defaultValue={getcoursedata?.departmentDetails?.address} onChange={handledepartment} name='address' />
+                          <input disabled type="text" defaultValue={getcoursedata?.departmentDetails?.address}  name='address' />
                         </div>
                         <div className='department-details-single'>
                           <label>Phone</label>
-                          <input type="tel" defaultValue={getcoursedata?.departmentDetails?.number} onChange={handledepartment} name='number' />
+                          <input disabled type="tel" defaultValue={getcoursedata?.departmentDetails?.number}  name='number' />
                         </div>
                       </div>
                     </div>
@@ -854,7 +778,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="activeStatus"
-                      onChange={handleChange}
                       className='addArtist-inputField'
                       defaultValue={getcoursedata?.activeStatus}
                       row>
@@ -880,15 +803,15 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
 
                           <div className='department-details-single'>
                             <label >Email</label>
-                            <input type="email" defaultValue={getcoursedata?.admissionOffice?.email} onChange={handleadmissionoffice} name="email" id="" />
+                            <input disabled type="email" defaultValue={getcoursedata?.admissionOffice?.email}  name="email" id="" />
                           </div>
                           <div className='department-details-single'>
                             <label>Address</label>
-                            <input type="text" defaultValue={getcoursedata?.admissionOffice?.address} onChange={handleadmissionoffice} name='address' />
+                            <input disabled type="text" defaultValue={getcoursedata?.admissionOffice?.address}  name='address' />
                           </div>
                           <div className='department-details-single'>
                             <label>Phone</label>
-                            <input type="tel"  defaultValue={getcoursedata?.admissionOffice?.number} onChange={handleadmissionoffice} name='number' />
+                            <input disabled type="tel"  defaultValue={getcoursedata?.admissionOffice?.number}  name='number' />
                           </div>
                         </div>
                       </div>
@@ -899,12 +822,12 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                       Program Length  (Months)
                     </label>
                     <input
+                    disabled
                       type='number'
                       min="1"
                       max="60"
                       defaultValue={getcoursedata?.programLength}
                       name='programLength'
-                      onChange={handleChange}
                       placeholder='Enter a number'
                       className='addArtist-inputField'
                     />
@@ -923,7 +846,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                         aria-labelledby="demo-row-controlled-radio-buttons-group"
                         defaultValue={getcoursedata?.loanAssist}
                         name="loanAssist"
-                        onChange={handleChange}
                         className='addArtist-inputField'
                         row>
                         <FormControlLabel value="true" control={<Radio />} label="Yes" />
@@ -939,7 +861,6 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                         aria-labelledby="demo-row-controlled-radio-buttons-group"
                         name="jobAssist"
                         defaultValue={getcoursedata?.jobAssist}
-                        onChange={handleChange}
                         className='addArtist-inputField'
                         row>
                         <FormControlLabel value="true" control={<Radio />} label="Yes" />
@@ -958,10 +879,10 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                       Course Link
                     </label>
                     <input
+                    disabled
                       type='text'
                       name='courseUrl'
                       defaultValue={getcoursedata?.courseUrl }
-                      onChange={handleChange}
                       placeholder='Drop The Link Here'
                       className='addArtist-inputField'
                     />
@@ -972,31 +893,16 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                       Remarks
                     </label>
                     <input
+                    disabled
                       type='text'
                       name='remarks'
                       defaultValue={getcoursedata?.remarks }
-                      onChange={handleChange}
                       placeholder='Give Remarks to the course'
                       className='addArtist-inputField'
                     />
                   </div>
               </div>
 
-              <div className='addArtist-submitDetailDiv'>
-                <button
-                  className='addArtist-submitDetailBtn'
-                  onClick={ handlesubmit }
-                >
-                  Update Course
-                  {
-                        spinn ? (
-                          <div class="spinner-border spinner-border-sm text-white mx-2" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div>    
-                        ) : ("")
-                }
-                </button>
-              </div>
             </div>
         
         )}
