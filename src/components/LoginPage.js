@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import demoLogo from '../images/logo.svg';
 import LoadingPage from './utils/LoadingPage';
 import { login } from '../redux/api';
-import axios from axios;
+import axios from "axios";
 import Cookies from 'js-cookie';
 
 import '../styles/LoginPage.css';
