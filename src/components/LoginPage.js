@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import demoLogo from '../images/logo.svg';
 import LoadingPage from './utils/LoadingPage';
 import { login } from '../redux/api';
+import axios from axios;
 import Cookies from 'js-cookie';
 
 import '../styles/LoginPage.css';
@@ -26,7 +27,7 @@ const LoginPage = () => {
     if (formData.email && formData.password) {
       setLoading(true);
       try {
-        const { data } = await login(formData);
+        const { data } = await axios.post("https://flywise0.herokuapp.com/api/admin/signin",formData);
         setLoading(false);
         Cookies.set('fanstarAdmin', data);
         history.push('/Universities');
